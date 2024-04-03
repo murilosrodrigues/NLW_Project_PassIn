@@ -50,11 +50,11 @@ public class RegisterAttendeeOnEventUseCase
 
         var attendeeAlreadyRegister = _dbContext.Attendees.Any(attendee => attendee.Email.Equals(request.Email) && attendee.Id == eventId);
         if (attendeeAlreadyRegister)
-            throw new ConflitException("You can not register twice on the same event.");
+            throw new ConflictException("You can not register twice on the same event.");
 
         var attendeesForEvent = _dbContext.Attendees.Count(attendee => attendee.Event_Id == eventId);
-        if (attendeesForEvent > eventEntity.Maximum_Attendees)
-            throw new ConflitException("There ir no room for this event.");
+        if (attendeesForEvent == eventEntity.Maximum_Attendees)
+            throw new ConflictException("There ir no room for this event.");
     }
 
     private bool EmailIsValid(string email)
