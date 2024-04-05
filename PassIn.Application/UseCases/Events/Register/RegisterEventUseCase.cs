@@ -27,7 +27,7 @@ public  class RegisterEventUseCase
 
         return new ResponseRegisteredJson
         {
-            ID = entity.Id
+            Id = entity.Id
         };
     }
 
